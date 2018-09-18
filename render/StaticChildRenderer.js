@@ -26,3 +26,7 @@ Gui.StaticChildRenderer.prototype.drawRect = function(color, minX, minY, maxX, m
 Gui.StaticChildRenderer.prototype.renderImage = function(image, minX, minY, maxX, maxY){
 	this.parent.renderImage(image, this.minX + this.width * minX, this.minY + this.height * minY, this.minX + this.width * maxX, this.minY + this.height * maxY);
 };
+
+Gui.StaticChildRenderer.prototype.renderTexture = function(image, minX, minY, maxX, maxY){
+	this.parent.renderTexture(image, this.minX + this.width * minX, this.minY + this.height * minY, this.minX + this.width * maxX, this.minY + this.height * maxY);
+};

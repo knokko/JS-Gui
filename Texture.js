@@ -49,12 +49,61 @@ Gui.Texture.prototype.clear = function(red, green, blue){
 	}
 };
 
+Gui.Texture.prototype.clone = function(){
+	const clone = new Gui.Texture(this.width, this.height);
+	javaArrayCopy(this.data, 0, clone.data, 0, this.data.length);
+	return clone;
+};
+
+Gui.Texture.prototype.addSpaceLeft = function(extra){
+	const newData = new Uint8ClampedArray((this.width + extra) * this.height * 4);
+	for(let y = 0; y < this.height; y++){
+		javaArrayCopy(this.data, 4 * y * this.width, newData, 4 * (extra + y * (this.width + extra)), this.width * 4);
+	}
+	this.width += extra;
+	this.data = newData;
+};
+
+Gui.Texture.prototype.addSpaceRight = function(extra){
+	const newData = new Uint8ClampedArray((this.width + extra) * this.height * 4);
+	for(let y = 0; y < this.height; y++){
+		javaArrayCopy(this.data, 4 * y * this.width, newData, 4 * y * (this.width + extra), this.width * 4);
+	}
+	this.width += extra;
+	this.data = newData;
+};
+
+Gui.Texture.prototype.addSpaceUp = function(extra){
+	const newData = new Uint8ClampedArray(this.width * (this.height + extra) * 4);
+	javaArrayCopy(this.data, 0, newData, this.width * extra * 4, this.data.length);
+	this.height += extra;
+	this.data = newData;
+};
+
+Gui.Texture.prototype.addSpaceDown = function(extra){
+	const newData = new Uint8ClampedArray(this.width * (this.height + extra) * 4);
+	javaArrayCopy(this.data, 0, newData, 0, this.data.length);
+	this.height += extra;
+	this.data = newData;
+};
+
 Gui.Texture.prototype.render = function(context, minX, minY){
 	const imageData = context.createImageData(this.width, this.height);
-	const d = imageData.data;
-	const length = this.data.length;
-	for(let index = 0; index < length; index++){
-		d[index] = this.data[index];
-	}
+	javaArrayCopy(this.data, 0, imageData.data, 0, this.data.length);
 	context.putImageData(imageData, minX, minY);
 };
+
+Gui.Texture.prototype.toImageData = function(data, minX, minY, maxX, maxY, dataWidth){
+	const width = maxX - minX + 1;
+	const height = maxY - minY + 1;
+	for(let y = 0; y < height; y++){
+		for(let x = 0; x < width; x++){
+			let dataIndex = 4 * (minX + x + (minY + y) * dataWidth);
+			let ownIndex = 4 * (Math.floor(x / width * this.width) + this.width * Math.floor(y / height * this.height));
+			data[dataIndex++] = this.data[ownIndex++];
+			data[dataIndex++] = this.data[ownIndex++];
+			data[dataIndex++] = this.data[ownIndex++];
+			data[dataIndex] = this.data[ownIndex];
+		}
+	}
+}
