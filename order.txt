@@ -16,3 +16,4 @@ component/TextInputComponent.js
 component/PasswordInputComponent.js
 menu/Menu.js
 menu/SubComponent.js
+menu/FullSubComponent.js

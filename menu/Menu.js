@@ -16,6 +16,10 @@ Gui.Menu.prototype.addComponent = function(component, minX, minY, maxX, maxY){
 	this.components.push(new Gui.MenuSubComponent(this, component, minX, minY, maxX, maxY));
 };
 
+Gui.Menu.prototype.addFullComponent = function(component){
+	this.components.push(new Gui.FullMenuSubComponent(this, component));
+};
+
 Gui.Menu.prototype.update = function(){
 	for(let index in this.components){
 		if(this.components[index].component.update){
