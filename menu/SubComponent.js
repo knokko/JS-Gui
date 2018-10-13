@@ -1,6 +1,6 @@
 Gui.MenuSubComponent = function(menu, component, minX, minY, maxX, maxY){
 	this.menu = menu;
-	this.renderer = new Gui.StaticChildRenderer(undefined);
+	this.renderer = new Gui.StaticChildRenderer(null);
 	this.component = component;
 	this.component.state = new Gui.StaticChildComponentState(menu.state);
 	if(this.component.init){
