@@ -1,7 +1,7 @@
 Gui.Toolbar = function(upperText, upperProps, upperHoverProps, upperActiveProps, upperComponentHeight, minX, maxX){
 	this.minX = minX;
 	this.maxX = maxX;
-	this.upperHeight = upperComponentHeight;
+	this.upperY = 1 - upperComponentHeight;
 	this.upperComponent = new Gui.ActivatableTextComponent(upperText, props, hoverProps, activeProps, function(){
 		this.active = !this.active;
 		this.state.getManager().markDirty();
@@ -14,7 +14,9 @@ Gui.Toolbar = function(upperText, upperProps, upperHoverProps, upperActiveProps,
 
 Gui.Toolbar.prototype.init = function(){
 	if(!this.didInit){
-		this.addComponent(this.upperComponent, this.upperHeight);
+		const y = this.upperY;
+		this.addComponent(this.upperComponent, this.upperY);
+		this.upperY = y;
 		this.addComponents();
 		this.didInit = true;
 	}
@@ -98,5 +100,5 @@ Gui.Toolbar.prototype.keyUp = function(key){
 };
 
 Gui.Toolbar.prototype.addComponent = function(component, height){
-	this.components.push(new Gui.ToolbarSubComponent(this, component));
+	this.components.push(new Gui.ToolbarSubComponent(this, component, height));
 };
