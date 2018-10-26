@@ -19,3 +19,4 @@ component/toolbar/SubComponent.js
 menu/Menu.js
 menu/SubComponent.js
 menu/FullSubComponent.js
+menu/PopupMenu.js
