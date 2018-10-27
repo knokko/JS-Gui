@@ -25,3 +25,11 @@ Gui.DynamicChildComponentState.prototype.getMouseY = function(){
 Gui.DynamicChildComponentState.prototype.getManager = function(){
 	return this.parent().getManager();
 };
+
+Gui.DynamicChildComponentState.prototype.getWidth = function(){
+	return Math.round((this.maxX() - this.minX()) * this.parent().getWidth());
+};
+
+Gui.DynamicChildComponentState.prototype.getHeight = function(){
+	return Math.round((this.maxY() - this.minY()) * this.parent().getHeight());
+};

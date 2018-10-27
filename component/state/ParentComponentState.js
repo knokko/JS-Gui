@@ -17,3 +17,11 @@ Gui.ParentComponentState.prototype.getMouseY = function(){
 Gui.ParentComponentState.prototype.getManager = function(){
 	return this.manager;
 };
+
+Gui.ParentComponentState.prototype.getWidth = function(){
+	return window.innerWidth;
+};
+
+Gui.ParentComponentState.prototype.getHeight = function(){
+	return window.innerHeight;
+};

@@ -26,3 +26,11 @@ Gui.StaticChildComponentState.prototype.getMouseY = function(){
 Gui.StaticChildComponentState.prototype.getManager = function(){
 	return this.parent.getManager();
 };
+
+Gui.StaticChildComponentState.prototype.getWidth = function(){
+	return Math.round((this.maxX - this.minX) * this.parent.getWidth());
+};
+
+Gui.StaticChildComponentState.prototype.getHeight = function(){
+	return Math.round((this.maxY - this.minY) * this.parent.getHeight());
+};
