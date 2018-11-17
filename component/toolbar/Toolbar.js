@@ -3,12 +3,16 @@ Gui.Toolbar = function(upperText, upperProps, upperHoverProps, upperActiveProps,
 	this.maxX = maxX;
 	this.upperMaxX = upperMaxX;
 	this.upperY = 1 - upperComponentHeight;
-	this.upperComponent = new Gui.ActivatableTextComponent(upperText, props, hoverProps, activeProps, function(){
+	this.upperComponent = new Gui.ActivatableTextComponent(upperText, upperProps, upperHoverProps, upperActiveProps, function(){
 		this.active = !this.active;
 		this.state.getManager().markDirty();
 	}, function(){
 		return this.active;
 	});
+	this.upperComponent.clickOut = function(button){
+		this.active = false;
+		this.state.getManager().markDirty();
+	};
 	this.didInit = false;
 	this.addComponents = addComponents;
 	this.components = [];
@@ -17,12 +21,14 @@ Gui.Toolbar = function(upperText, upperProps, upperHoverProps, upperActiveProps,
 Gui.Toolbar.prototype.init = function(){
 	if(!this.didInit){
 		const y = this.upperY;
-		this.addComponent(this.upperComponent, this.upperY);
+		this.addComponent(this.upperComponent, 1 - this.upperY);
 
 		// The upper component is special
 		this.components[0].maxX = this.upperMaxX;
-		this.components[0].renderer.setBounds(this.minX, 1 - y, this.upperMaxX, 1);
-		this.components[0].state.setBounds(this.minX, 1 - y, this.upperMaxX, 1);
+		this.components[0].renderer.setBounds(this.minX, y, this.upperMaxX, 1);
+		this.components[0].component.state.setBounds(this.minX, y, this.upperMaxX, 1);
+		this.components[0].minY = y;
+		this.components[0].maxY = 1;
 		this.upperY = y;
 
 		// Now add the other components
@@ -64,6 +70,7 @@ Gui.Toolbar.prototype.click = function(x, y, button){
 
 Gui.Toolbar.prototype.clickOut = function(button){
 	const length = this.components.length;
+	this.upperComponent.active = false;
 	for(let index = 0; index < length; index++){
 		if(this.components[index].component.clickOut){
 			this.components[index].component.clickOut(button);
