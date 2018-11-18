@@ -1,8 +1,12 @@
 Gui.Manager = function(){
 	this.mainComponent = null;
 	this.renderer = null;
+	this.guiState = null;
+	this.totalTickTime = 0;
+	this.ticks = 0;
 	this.mouseX = NaN;
 	this.mouseY = NaN;
+	this.mouseDown = false;
 	this.dirty = true;
 };
 
@@ -16,8 +20,6 @@ Gui.Manager.prototype.start = function(){
 	const manager = this;
 	this.guiState = new Gui.ParentComponentState(this);
 	this.mainComponent.state = this.guiState;
-	this.totalTickTime = 0;
-	this.ticks = 0;
 	if(this.mainComponent.init){
 		this.mainComponent.init();
 	}
@@ -30,6 +32,12 @@ Gui.Manager.prototype.start = function(){
 		manager.mouseX = event.pageX / window.innerWidth;
 		manager.mouseY = 1 - event.pageY / window.innerHeight;
 		manager.markDirty();
+	});
+	window.addEventListener('mousedown', function(event){
+		manager.mouseDown = true;
+	});
+	window.addEventListener('mouseup', function(event){
+		manager.mouseDown = false;
 	});
 	window.addEventListener('mouseenter', function(event){
 		manager.mouseX = event.pageX / window.innerWidth;
