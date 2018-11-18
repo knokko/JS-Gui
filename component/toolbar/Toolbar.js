@@ -59,13 +59,13 @@ Gui.Toolbar.prototype.render = function(renderer){
 };
 
 Gui.Toolbar.prototype.click = function(x, y, button){
-	this.components[0].click(x, y, button);
 	if(this.upperComponent.isActive()){
 		const length = this.components.length;
 		for(let index = 1; index < length; index++){
 			this.components[index].click(x, y, button);
 		}
 	}
+	this.components[0].click(x, y, button);
 };
 
 Gui.Toolbar.prototype.clickOut = function(button){

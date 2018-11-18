@@ -10,6 +10,8 @@ Gui.PopupMenu = function(background, foreground, minX, minY, maxX, maxY){
 };
 
 Gui.PopupMenu.prototype.init = function(){
+	this.foreground.state = new Gui.StaticChildComponentState(this.state);
+	this.foreground.state.setBounds(this.minX, this.minY, this.maxX, this.maxY);
 	this.background.init();
 	this.foreground.init();
 };
@@ -20,7 +22,7 @@ Gui.PopupMenu.prototype.update = function(){
 
 Gui.PopupMenu.prototype.render = function(renderer){
 	this.background.render(renderer);
-	renderer.fillRect('rgba(0, 0, 0, 100)', 0, 0, 1, 1);
+	renderer.fillRect('rgba(0, 0, 0, 0.4)', 0, 0, 1, 1);
 	this.renderer.parent = renderer;
 	this.foreground.render(this.renderer);
 };
