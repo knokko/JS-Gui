@@ -7,6 +7,7 @@ render/DynamicChildRenderer.js
 component/state/ParentComponentState.js
 component/state/StaticChildComponentState.js
 component/state/DynamicChildComponentState.js
+component/state/BackgroundComponentState.js
 component/WrapperComponent.js
 component/BackgroundComponent.js
 component/ImageComponent.js

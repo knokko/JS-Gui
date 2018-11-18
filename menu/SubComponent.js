@@ -2,11 +2,22 @@ Gui.MenuSubComponent = function(menu, component, minX, minY, maxX, maxY){
 	this.menu = menu;
 	this.renderer = new Gui.StaticChildRenderer(null);
 	this.component = component;
-	this.component.state = new Gui.StaticChildComponentState(menu.state);
+	const sub = this;
+	this.component.state = new Gui.DynamicChildComponentState(function() {
+		return sub.menu.state;
+	}, function(){
+		return sub.minX;
+	}, function(){
+		return sub.minY;
+	}, function(){
+		return sub.maxX;
+	}, function(){
+		return sub.maxY;
+	});
+	this.setBounds(minX, minY, maxX, maxY);
 	if(this.component.init){
 		this.component.init();
 	}
-	this.setBounds(minX, minY, maxX, maxY);
 };
 
 Gui.MenuSubComponent.prototype.render = function(renderer){
@@ -38,6 +49,5 @@ Gui.MenuSubComponent.prototype.setBounds = function(minX, minY, maxX, maxY){
 	this.minY = minY;
 	this.maxX = maxX;
 	this.maxY = maxY;
-	this.component.state.setBounds(minX, minY, maxX, maxY);
 	this.renderer.setBounds(minX, minY, maxX, maxY);
 };

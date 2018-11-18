@@ -12,6 +12,7 @@ Gui.PopupMenu = function(background, foreground, minX, minY, maxX, maxY){
 Gui.PopupMenu.prototype.init = function(){
 	this.foreground.state = new Gui.StaticChildComponentState(this.state);
 	this.foreground.state.setBounds(this.minX, this.minY, this.maxX, this.maxY);
+	this.background.state = new Gui.BackgroundComponentState(this.state);
 	this.background.init();
 	this.foreground.init();
 };
@@ -49,4 +50,9 @@ Gui.PopupMenu.prototype.keyDown = function(key){
 
 Gui.PopupMenu.prototype.keyUp = function(key){
 	this.foreground.keyUp(key);
+};
+
+Gui.PopupMenu.prototype.onClose = function(){
+	this.background.state = this.state;
+	this.background.init();
 };
