@@ -12,6 +12,7 @@ component/WrapperComponent.js
 component/BackgroundComponent.js
 component/ImageComponent.js
 component/TextComponent.js
+component/TextAreaComponent.js
 component/ActivatableTextComponent.js
 component/ConditionalTextComponent.js
 component/TextInputComponent.js
