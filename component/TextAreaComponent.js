@@ -10,6 +10,6 @@ Gui.TextAreaComponent = function(text, props, hoverProps, onClick, width, height
 
 extendProtoType(Gui.TextComponent, Gui.TextAreaComponent);
 
-Gui.TextAComponent.prototype.createImage = function(text, props){
+Gui.TextAreaComponent.prototype.createImage = function(text, props){
 	return ImageFactory.createTextAreaImage(text, props, this.width, this.height);
 };
