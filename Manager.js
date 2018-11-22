@@ -14,6 +14,23 @@ Gui.Manager.prototype.markDirty = function(){
 	this.dirty = true;
 };
 
+Gui.Manager.prototype.convertKey = function(key){
+	// For some reason, internet explorer uses Left instead of ArrowLeft
+	if (key === 'Left') {
+		return 'ArrowLeft';
+	}
+	if (key === 'Up') {
+		return 'ArrowUp';
+	}
+	if (key === 'Right') {
+		return 'ArrowRight';
+	}
+	if (key === 'Down') {
+		return 'ArrowDown';
+	}
+	return key;
+}
+
 Gui.Manager.prototype.start = function(){
 	this.renderer = new Gui.CanvasRenderer();
 	this.renderer.start();
@@ -55,12 +72,12 @@ Gui.Manager.prototype.start = function(){
 	});
 	window.addEventListener('keypress', function(event){
 		if(event.key.length === 1 && manager.mainComponent.keyType){
-			manager.mainComponent.keyType(event.key);
+			manager.mainComponent.keyType(manager.convertKey(event.key));
 		}
 	});
 	window.addEventListener('keydown', function(event){
 		if(manager.mainComponent.keyDown){
-			manager.mainComponent.keyDown(event.key);
+			manager.mainComponent.keyDown(manager.convertKey(event.key));
 		}
 		if(event.key === 't'){
 			console.log('Average tick time is ' + (manager.totalTickTime / manager.ticks) + ' ms');
@@ -68,7 +85,7 @@ Gui.Manager.prototype.start = function(){
 	});
 	window.addEventListener('keyup', function(event){
 		if(manager.mainComponent.keyUp){
-			manager.mainComponent.keyUp(event.key);
+			manager.mainComponent.keyUp(manager.convertKey(event.key));
 		}
 	});
 	const onGuiUpdate = function(timestamp){
