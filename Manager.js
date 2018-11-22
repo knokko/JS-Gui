@@ -54,7 +54,7 @@ Gui.Manager.prototype.start = function(){
 		manager.markDirty();
 	});
 	window.addEventListener('keypress', function(event){
-		if(event.key.length > 0 && manager.mainComponent.keyType){
+		if(event.key.length === 1 && manager.mainComponent.keyType){
 			manager.mainComponent.keyType(event.key);
 		}
 	});
