@@ -24,9 +24,7 @@ Gui.ActivatableTextComponent.prototype.refreshActiveImage = function(){
 
 Gui.ActivatableTextComponent.prototype.setActiveImage = function(image){
 	this.activeImage = image;
-	if(this.state){
-		this.state.getManager().markDirty();
-	}
+	this.markOnComplete(image);
 };
 
 Gui.ActivatableTextComponent.prototype.setActiveProps = function(props){

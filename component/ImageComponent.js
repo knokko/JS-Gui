@@ -14,14 +14,27 @@ Gui.ImageComponent.prototype.render = function(renderer){
 
 Gui.ImageComponent.prototype.setBaseImage = function(image){
 	this.baseImage = image;
-	if(this.state){
-		this.state.getManager().markDirty();
-	}
+	this.markOnComplete(image);
 };
 
 Gui.ImageComponent.prototype.setHoverImage = function(image){
 	this.hoverImage = image;
-	if(this.state){
-		this.state.getManager().markDirty();
+	this.markOnComplete(image);
+};
+
+Gui.ImageComponent.prototype.markOnComplete = function(image){
+	if (image) {
+		const component = this;
+		if (image.complete) {
+			if (this.state) {
+				this.state.getManager().markDirty();
+			}
+		} else {
+			image.addEventListener('load', function(){
+				if (component.state) {
+					component.state.getManager().markDirty();
+				}
+			});
+		}
 	}
 };

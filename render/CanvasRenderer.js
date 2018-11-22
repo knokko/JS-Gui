@@ -38,7 +38,10 @@ Gui.CanvasRenderer.prototype.drawRect = function(color, minX, minY, maxX, maxY){
 
 Gui.CanvasRenderer.prototype.renderImage = function(image, minX, minY, maxX, maxY){
 	if(maxX >= 0 && maxY >= 0 && minX <= 1 && minY <= 1){
-		this.context.drawImage(image, minX * this.width, (1 - maxY) * this.height, (maxX - minX) * this.width, (maxY - minY) * this.height);
+		// It is possible that one of the images is incomplete, in that case a new render will be called soon
+		if (image.complete) {
+			this.context.drawImage(image, minX * this.width, (1 - maxY) * this.height, (maxX - minX) * this.width, (maxY - minY) * this.height);
+		}
 	}
 };
 
