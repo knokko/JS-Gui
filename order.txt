@@ -15,6 +15,7 @@ component/TextComponent.js
 component/TextAreaComponent.js
 component/ActivatableTextComponent.js
 component/ConditionalTextComponent.js
+component/ConditionalTextAreaComponent.js
 component/TextInputComponent.js
 component/PasswordInputComponent.js
 component/toolbar/Toolbar.js
