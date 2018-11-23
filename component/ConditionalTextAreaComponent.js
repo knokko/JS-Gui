@@ -3,7 +3,7 @@ Gui.ConditionalTextAreaComponent = function(text, props, hoverProps, onClick, co
 	this.props = props;
 	this.hoverProps = hoverProps;
 	this.click = function(x, y, button){
-		if (this.condition()) {
+		if (onClick && this.condition()) {
 			onClick();
 		}
 	};
