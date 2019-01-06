@@ -13,6 +13,7 @@ Gui.Toolbar = function(upperText, upperProps, upperHoverProps, upperActiveProps,
 		this.active = false;
 		this.state.getManager().markDirty();
 	};
+	this.upperComponent.active = false;
 	this.didInit = false;
 	this.addComponents = addComponents;
 	this.components = [];

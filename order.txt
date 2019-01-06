@@ -20,6 +20,7 @@ component/TextInputComponent.js
 component/PasswordInputComponent.js
 component/toolbar/Toolbar.js
 component/toolbar/SubComponent.js
+component/ComboBox.js
 menu/Menu.js
 menu/SubComponent.js
 menu/FullSubComponent.js
