@@ -49,6 +49,14 @@ Gui.Menu.prototype.clickOut = function(button){
 	}
 };
 
+Gui.Menu.prototype.scroll = function(amount){
+	for (let index in this.components){
+		if (this.components[index].component.scroll){
+			this.components[index].component.scroll(amount);
+		}
+	}
+}
+
 Gui.Menu.prototype.keyType = function(key){
 	for(let index in this.components){
 		if(this.components[index].component.keyType){

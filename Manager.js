@@ -56,6 +56,11 @@ Gui.Manager.prototype.start = function(){
 	window.addEventListener('mouseup', function(event){
 		manager.mouseDown = false;
 	});
+	window.addEventListener('wheel', function(event){
+		if (manager.mainComponent.scroll){
+			manager.mainComponent.scroll(event.deltaY / 100);
+		}
+	});
 	window.addEventListener('mouseenter', function(event){
 		manager.mouseX = event.pageX / window.innerWidth;
 		manager.mouseY = 1 - event.pageY / window.innerHeight;

@@ -96,8 +96,8 @@ Gui.Texture.prototype.render = function(context, minX, minY){
 Gui.Texture.prototype.toImageData = function(data, minX, minY, maxX, maxY, dataWidth, ownMinX, ownMinY, ownMaxX, ownMaxY){
 	if (ownMinX === undefined) ownMinX = 0;
 	if (ownMinY === undefined) ownMinY = 0;
-	if (ownMaxX === undefined) ownMaxX = this.width + 1;
-	if (ownMaxY === undefined) ownMaxY = this.height + 1;
+	if (ownMaxX === undefined) ownMaxX = this.width - 1;
+	if (ownMaxY === undefined) ownMaxY = this.height - 1;
 	const ownWidth = ownMaxX - ownMinX + 1;
 	const ownHeight = ownMaxY - ownMinY + 1;
 	const width = maxX - minX + 1;
