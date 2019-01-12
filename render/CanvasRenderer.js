@@ -45,14 +45,14 @@ Gui.CanvasRenderer.prototype.renderImage = function(image, minX, minY, maxX, max
 	}
 };
 
-Gui.CanvasRenderer.prototype.renderTexture = function(texture, minX, minY, maxX, maxY){
+Gui.CanvasRenderer.prototype.renderTexture = function(texture, minX, minY, maxX, maxY, textureMinX, textureMinY, textureMaxX, textureMaxY){
 	if(maxX >= 0 && maxY >= 0 && minX <= 1 && minY <= 1){
 		const minPX = Math.round(minX * this.width);
 		const minPY = Math.round((1 - maxY) * this.height);
 		const maxPX = Math.round(maxX * this.width);
 		const maxPY = Math.round((1 - minY) * this.height);
 		const imageData = this.context.createImageData(maxPX - minPX + 1, maxPY - minPY + 1);
-		texture.toImageData(imageData.data, minPX, minPY, maxPX, maxPY, maxPX - minPX + 1);
+		texture.toImageData(imageData.data, 0, 0, maxPX - minPX, maxPY - minPY, maxPX - minPX + 1, textureMinX, textureMinY, textureMaxX, textureMaxY);
 		this.context.putImageData(imageData, minPX, minPY);
 	}
 }

@@ -93,17 +93,23 @@ Gui.Texture.prototype.render = function(context, minX, minY){
 	context.putImageData(imageData, minX, minY);
 };
 
-Gui.Texture.prototype.toImageData = function(data, minX, minY, maxX, maxY, dataWidth){
+Gui.Texture.prototype.toImageData = function(data, minX, minY, maxX, maxY, dataWidth, ownMinX, ownMinY, ownMaxX, ownMaxY){
+	if (ownMinX === undefined) ownMinX = 0;
+	if (ownMinY === undefined) ownMinY = 0;
+	if (ownMaxX === undefined) ownMaxX = this.width + 1;
+	if (ownMaxY === undefined) ownMaxY = this.height + 1;
+	const ownWidth = ownMaxX - ownMinX + 1;
+	const ownHeight = ownMaxY - ownMinY + 1;
 	const width = maxX - minX + 1;
 	const height = maxY - minY + 1;
 	for(let y = 0; y < height; y++){
 		for(let x = 0; x < width; x++){
 			let dataIndex = 4 * (minX + x + (minY + y) * dataWidth);
-			let ownIndex = 4 * (Math.floor(x / width * this.width) + this.width * Math.floor(y / height * this.height));
+			let ownIndex = 4 * (Math.floor(ownMinX + x / width * ownWidth) + this.width * Math.floor(ownMinY + y / height * ownHeight));
 			data[dataIndex++] = this.data[ownIndex++];
 			data[dataIndex++] = this.data[ownIndex++];
 			data[dataIndex++] = this.data[ownIndex++];
 			data[dataIndex] = this.data[ownIndex];
 		}
 	}
-}
+};

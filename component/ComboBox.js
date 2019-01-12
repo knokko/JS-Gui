@@ -55,10 +55,11 @@ Gui.ComboBox.prototype.init = function(){
 		const length = values.length;
 		const props = this.props;
 		const hoverProps = this.hoverProps;
+		const thisComboBox = this;
 		for (let index = 0; index < length; index++){
 			this.addComponent(new Gui.TextComponent(values[index], props, hoverProps, function(){
-				this.upperComponent.setText(this.text);
-				this.onSelect(this.text);
+				thisComboBox.upperComponent.setText(this.text);
+				thisComboBox.onSelect(this.text);
 			}), height);
 		}
 		this.didInit = true;
