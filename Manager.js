@@ -32,6 +32,7 @@ Gui.Manager.prototype.convertKey = function(key){
 }
 
 Gui.Manager.prototype.start = function(){
+	this.charBuilder = new Gui.CanvasCharBuilder();
 	this.renderer = new Gui.CanvasRenderer();
 	this.renderer.start();
 	const manager = this;

@@ -1,6 +1,7 @@
 Gui.js
 Manager.js
 Texture.js
+CanvasCharBuilder.js
 render/CanvasRenderer.js
 render/StaticChildRenderer.js
 render/DynamicChildRenderer.js
@@ -18,6 +19,7 @@ component/ConditionalTextComponent.js
 component/ConditionalTextAreaComponent.js
 component/TextInputComponent.js
 component/PasswordInputComponent.js
+component/DynamicTextComponent.js
 component/toolbar/Toolbar.js
 component/toolbar/SubComponent.js
 component/ComboBox.js
