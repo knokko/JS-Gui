@@ -2,18 +2,27 @@ Gui.FullMenuSubComponent = function(menu, component){
 	this.menu = menu;
 	this.renderer = new Gui.StaticChildRenderer(undefined);
 	this.component = component;
+	this.initComponent();
+};
+
+Gui.FullMenuSubComponent.prototype.render = function(renderer){
+	if(this.component.render){
+		this.component.render(renderer);
+	}
+};
+
+Gui.FullMenuSubComponent.prototype.setComponent = function(newComponent){
+	this.component = newComponent;
+	this.initComponent();
+};
+
+Gui.FullMenuSubComponent.prototype.initComponent = function(){
 	const sub = this;
 	this.component.state = new Gui.DynamicChildComponentState(function(){
 		return sub.menu.state;
 	}, this.getMinX, this.getMinY, this.getMaxX, this.getMaxY);
 	if(this.component.init){
 		this.component.init();
-	}
-};
-
-Gui.FullMenuSubComponent.prototype.render = function(renderer){
-	if(this.component.render){
-		this.component.render(renderer);
 	}
 };
 

@@ -13,11 +13,15 @@ Gui.Menu.prototype.init = function(){
 };
 
 Gui.Menu.prototype.addComponent = function(component, minX, minY, maxX, maxY){
-	this.components.push(new Gui.MenuSubComponent(this, component, minX, minY, maxX, maxY));
+	const subComponent = new Gui.MenuSubComponent(this, component, minX, minY, maxX, maxY);
+	this.components.push(subComponent);
+	return subComponent;
 };
 
 Gui.Menu.prototype.addFullComponent = function(component){
-	this.components.push(new Gui.FullMenuSubComponent(this, component));
+	const subComponent = new Gui.FullMenuSubComponent(this, component);
+	this.components.push(subComponent);
+	return subComponent;
 };
 
 Gui.Menu.prototype.update = function(){
