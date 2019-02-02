@@ -119,7 +119,6 @@ Gui.DynamicSingleText.prototype.render = function(renderer){
 	renderer.fillRect(this.props.borderColor, 1 - this.props.borderX, 0, 1, 1);
 	if (this.xCoords) {
 		for (let index = 0; index < this.textures.length; index++) {
-			console.log('complete is ' + this.textures[index].complete + ' for index ' + index);
 			renderer.renderImage(this.textures[index], this.xCoords[index], this.minTextY, this.xCoords[index + 1], this.maxTextY);
 		}
 	}
